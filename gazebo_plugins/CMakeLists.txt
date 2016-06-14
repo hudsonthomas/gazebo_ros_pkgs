@@ -92,6 +92,7 @@ catkin_package(
   gazebo_ros_depth_camera 
   gazebo_ros_openni_kinect 
   gazebo_ros_gpu_laser 
+  gazebo_ros_harness
   gazebo_ros_laser 
   gazebo_ros_block_laser 
   gazebo_ros_p3d 
@@ -196,6 +197,11 @@ target_link_libraries(gazebo_ros_openni_kinect gazebo_ros_camera_utils ${GAZEBO_
 
 add_library(gazebo_ros_gpu_laser src/gazebo_ros_gpu_laser.cpp)
 target_link_libraries(gazebo_ros_gpu_laser ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} GpuRayPlugin)
+
+add_library(gazebo_ros_harness src/gazebo_ros_harness.cpp)
+add_dependencies(gazebo_ros_harness ${catkin_EXPORTED_TARGETS})
+target_link_libraries(gazebo_ros_harness ${GAZEBO_LIBRARIES}
+  ${Boost_LIBRARIES} HarnessPlugin ${catkin_LIBRARIES})
 
 add_library(gazebo_ros_laser src/gazebo_ros_laser.cpp)
 target_link_libraries(gazebo_ros_laser ${GAZEBO_LIBRARIES} RayPlugin ${catkin_LIBRARIES})
@@ -307,6 +313,7 @@ install(TARGETS
   gazebo_ros_skid_steer_drive
   gazebo_ros_video
   gazebo_ros_planar_move
+  gazebo_ros_harness
   pub_joint_trajectory_test  
   gazebo_ros_gpu_laser
   gazebo_ros_range
