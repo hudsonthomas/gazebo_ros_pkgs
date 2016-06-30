@@ -2,12 +2,12 @@
 #include <boost/bind.hpp>
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
-#include <BulletLink.hh>
+#include <gazebo/physics/bullet/BulletLink.hh>
 #include <gazebo/common/common.hh>
 #include <stdio.h>
 
-#include <btSoftBody.h>
-#include <btSoftBodyHelpers.h>
+#include <BulletSoftBody/btSoftBody.h>
+#include <BulletSoftBody/btSoftBodyHelpers.h>
 #include "LinearMath/btScalar.h"
 
 #include <gazebo/transport/transport.hh>

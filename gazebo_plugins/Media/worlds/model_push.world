@@ -28,11 +28,11 @@
               <size>1 1 1</size>
             </box>
           </geometry>
-	  <plugin name="visual_plugin" filename="libvisual_plugin.so"/>
+	  <plugin name="visual_plugin" filename="libgazebo_soft_body_visual.so"/>
         </visual>
       </link>
 
-      <plugin name="model_push" filename="libmodel_push.so"/>
+      <plugin name="model_push" filename="libgazebo_soft_body_model.so"/>
     </model>        
   </world>
 </sdf>

@@ -34,6 +34,7 @@ if (PKG_CONFIG_FOUND)
   pkg_check_modules(OGRE OGRE)
   pkg_check_modules(OGRE-Terrain OGRE-Terrain)
   pkg_check_modules(OGRE-Paging OGRE-Paging)
+  pkg_check_modules(BULLET bullet)
 else()
   message(FATAL_ERROR "pkg-config is required; please install it")
 endif()
@@ -266,6 +267,20 @@ target_link_libraries(gazebo_ros_ft_sensor ${GAZEBO_LIBRARIES} ${catkin_LIBRARIE
 
 add_library(gazebo_ros_range src/gazebo_ros_range.cpp)
 target_link_libraries(gazebo_ros_range ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES} RayPlugin)
+
+# Bullet-based plugins
+if(BULLET_FOUND)
+  include_directories(${BULLET_INCLUDE_DIRS})
+  message(WARNING "Bullet libs: ${BULLET_LIBRARIES}")
+
+  add_library(gazebo_soft_body_model src/model_push.cc)
+  target_link_libraries(gazebo_soft_body_model ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES} ${BULLET_LIBRARIES})
+
+  add_library(gazebo_soft_body_visual src/visual_plugin.cc)
+  target_link_libraries(gazebo_soft_body_visual ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES} ${Boost_LIBRARIES} ${BULLET_LIBRARIES})
+else()
+  message(WARNING "Could not find bullet.")
+endif()
 
 ##
 ## Add your new plugin here
